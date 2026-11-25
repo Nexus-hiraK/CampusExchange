@@ -1,4 +1,4 @@
-// 1. INITIAL DATA
+// INITIAL DATA
 const sampleItems = [
     { id: 1, name: "Engineering Mathematics Textbook", category: "Textbooks", price: 250, semester: "1st", branch: "CSE", condition: "Gently Used", seller: "Rahul Sharma", contact: "9876543210", description: "Engineering Mathematics textbook. All chapters are intact and pages are in good condition.", image: "", icon: "📚" },
     { id: 2, name: "Professional Engineering Drafter", category: "Engineering Drafter", price: 150, semester: "1st", branch: "ME", condition: "Gently Used", seller: "Aman Verma", contact: "9876543211", description: "Good quality drafter. Smooth working mechanism. Suitable for engineering drawing.", image: "", icon: "📐" },
@@ -33,7 +33,6 @@ let selectedCategory = "All";
 let showOnlySaved = false;
 let uploadedImage = "";
 
-// OFFICIAL CAMPUSEXCHANGE CONFIGURATION
 const OFFICIAL_WHATSAPP_NUMBER = "910000000000";
 
 function getOfficialWhatsAppUrl(message = "") {
@@ -75,7 +74,7 @@ function deleteItem(itemId) {
     filterItems();
 }
 
-// Load bookmarked/saved item IDs
+
 function loadSavedItemIds() {
     return new Set(loadJsonStorage("campusExchangeSavedItems", []).map(String));
 }
@@ -108,7 +107,7 @@ function saveItems() {
     }
 }
 
-// 2. DOM ELEMENTS
+//DOM ELEMENTS
 const productGrid = document.getElementById("productGrid");
 const searchInput = document.getElementById("searchInput");
 const semesterFilter = document.getElementById("semesterFilter");
@@ -119,7 +118,7 @@ const listingCount = document.getElementById("listingCount");
 const totalItems = document.getElementById("totalItems");
 const emptyState = document.getElementById("emptyState");
 
-// 3. HELPER FUNCTIONS
+
 function escapeHTML(value) {
     return String(value ?? "").replace(/[&<>"']/g, c => ({
         "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#039;"
@@ -175,7 +174,7 @@ function fallbackCopy(text, callback) {
 
 const bookmarkSvg = filled => `<svg width="16" height="16" viewBox="0 0 24 24" fill="${filled ? "currentColor" : "none"}" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path></svg>`;
 
-// 4. DISPLAY PRODUCT CARDS
+// DISPLAY PRODUCT CARDS
 function renderItems(filteredItems) {
     productGrid.innerHTML = "";
     listingCount.textContent = `${filteredItems.length} items found`;
@@ -222,7 +221,7 @@ function renderItems(filteredItems) {
     });
 }
 
-// 5. SEARCH AND FILTER FUNCTIONALITY
+
 function filterItems() {
     const searchTerm = searchInput.value.toLowerCase().trim();
     const semester = semesterFilter.value;
@@ -257,7 +256,7 @@ branchFilter.addEventListener("change", filterItems);
 priceFilter.addEventListener("change", filterItems);
 sortFilter.addEventListener("change", filterItems);
 
-// 6. CATEGORY FILTER
+// CATEGORY FILTER
 document.getElementById("categoryFilters").addEventListener("click", function(event) {
     const button = event.target.closest(".category-btn");
     if (!button) return;
@@ -279,7 +278,7 @@ document.getElementById("categoryFilters").addEventListener("click", function(ev
     filterItems();
 });
 
-// 7. RESET FILTERS
+// RESET FILTERS
 function resetFilters() {
     searchInput.value = "";
     semesterFilter.value = "All";
@@ -298,7 +297,7 @@ function resetFilters() {
 document.getElementById("resetFilters").addEventListener("click", resetFilters);
 document.getElementById("clearSearch").addEventListener("click", resetFilters);
 
-// 8. ITEM DETAILS MODAL
+// ITEM DETAILS MODAL
 const itemModal = document.getElementById("itemModal");
 const modalBody = document.getElementById("modalBody");
 
@@ -473,7 +472,7 @@ document.addEventListener("keydown", event => {
     }
 });
 
-// 9. IMAGE UPLOAD AND PREVIEW
+//IMAGE UPLOAD AND PREVIEW
 const imageInput = document.getElementById("itemImage");
 const preview = document.getElementById("imagePreview");
 const previewImg = document.getElementById("previewImg");
@@ -509,7 +508,7 @@ document.getElementById("removeImage").addEventListener("click", () => {
     preview.classList.add("hidden");
 });
 
-// 10. POST NEW ITEM
+// POST NEW ITEM
 const itemForm = document.getElementById("itemForm");
 
 itemForm.addEventListener("submit", function(event) {
@@ -564,7 +563,7 @@ itemForm.addEventListener("submit", function(event) {
     document.getElementById("browse").scrollIntoView({ behavior: "smooth" });
 });
 
-// 11. DARK MODE
+// DARK MODE
 const themeToggle = document.getElementById("themeToggle");
 const themeIcon = document.getElementById("themeIcon");
 
@@ -585,7 +584,7 @@ themeToggle.addEventListener("click", () => {
     try { localStorage.setItem("campusExchangeTheme", newTheme); } catch (e) { console.error("Could not save theme:", e); }
 });
 
-// 12. AUTHENTICATION (LOGIN & SIGN UP)
+// AUTHENTICATION (LOGIN & SIGN UP)
 const AUTH_API_BASE = "http://127.0.0.1:3000/api/auth";
 const authBtn = document.getElementById("authBtn");
 const userArea = document.getElementById("userArea");
@@ -802,7 +801,7 @@ async function handleLogout() {
     showToast("You have been logged out.");
 }
 
-// Auth Event Listeners
+
 if (authBtn) authBtn.addEventListener("click", () => openAuthModal("login"));
 if (closeAuthModalBtn) closeAuthModalBtn.addEventListener("click", closeAuthModal);
 if (authModal) authModal.addEventListener("click", e => { if (e.target === authModal) closeAuthModal(); });
@@ -919,7 +918,7 @@ if (signupForm) {
     });
 }
 
-// 13. INITIALIZE WEBSITE
+
 const footerWaLink = document.getElementById("footerWhatsAppLink");
 if (footerWaLink) footerWaLink.href = getOfficialWhatsAppUrl();
 

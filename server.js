@@ -1,15 +1,3 @@
-/**
- * CampusExchange Authentication & API Server
- * 
- * Genuine authentication backend implementing:
- * - Scrypt cryptographic password hashing with 16-byte random salts
- * - Constant-time timing-safe hash comparison
- * - Cryptographically random session tokens
- * - JSON-based persistence in ./data/
- * - CORS support for local dev and VS Code Live Server
- * - Zero external npm dependencies (uses standard Node.js libraries)
- */
-
 const http = require("http");
 const fs = require("fs");
 const path = require("path");
@@ -20,7 +8,7 @@ const DATA_DIR = path.join(__dirname, "data");
 const USERS_FILE = path.join(DATA_DIR, "users.json");
 const SESSIONS_FILE = path.join(DATA_DIR, "sessions.json");
 
-// Ensure data directory and files exist
+
 if (!fs.existsSync(DATA_DIR)) {
     fs.mkdirSync(DATA_DIR, { recursive: true });
 }
@@ -147,7 +135,7 @@ const MIME_TYPES = {
 };
 
 const server = http.createServer(async (req, res) => {
-    // Handle CORS preflight
+    
     if (req.method === "OPTIONS") {
         res.writeHead(204, {
             "Access-Control-Allow-Origin": "*",
@@ -257,7 +245,7 @@ const server = http.createServer(async (req, res) => {
         return sendJSON(res, 200, { success: true });
     }
 
-    // Static file serving for standalone mode
+    
     let filePath = path.join(__dirname, pathname === "/" ? "index.html" : pathname);
     const ext = path.extname(filePath).toLowerCase();
     const contentType = MIME_TYPES[ext] || "application/octet-stream";
